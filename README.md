@@ -58,6 +58,7 @@ Limites de l'environnement : l'inscription échoue (les cas de connexion seront 
 ├── plan-de-test.md     Plan de test (périmètre, approche, critères, risques)
 ├── cas-de-test.csv     41 cas de test avec notes de découverte
 ├── anomalies.md        Anomalies avec étapes de reproduction et captures
+├── xray/               Fichiers CSV d'import dans Xray (version corrigée, une ligne par pas)
 └── captures/           Captures d'écran (données personnelles masquées)
 ```
 
@@ -72,7 +73,9 @@ Limites de l'environnement : l'inscription échoue (les cas de connexion seront 
 | Caisse, étapes (BUG-4) | [16](captures/16-caisse-etape1-shipping-free.png), [28](captures/28-caisse-etape1-formulaire-rempli.png), [17](captures/17-caisse-etape2-shipping-free.png), [31](captures/31-caisse-etape2-fastway-selectionne.png), [18](captures/18-caisse-etape3-total-ace.png), [19](captures/19-caisse-etape3-total-fastway.png) |
 | Caisse, validations | [20 téléphone invalide](captures/20-caisse-telephone-invalide.png), [30 téléphone étranger accepté](captures/30-caisse-telephone-etranger-accepte.png), [21 code postal invalide](captures/21-caisse-code-postal-invalide.png), [22 email vide](captures/22-caisse-email-vide.png), [23 email invalide](captures/23-caisse-email-invalide.png), [24 code promo invalide](captures/24-caisse-code-promo-invalide.png), [27 libellés optional](captures/27-caisse-libelles-optional.png) |
 | Totaux panier / caisse (BUG-6) | [25](captures/25-panier-sous-total-75-88.png), [26](captures/26-caisse-sous-total-11-94.png), [32](captures/32-caisse-6-articles-total-75-88.png) |
-| Import des cas de test dans Xray | [33 mapping des champs](captures/33-xray-mapping-champs.png), [34 import réussi](captures/34-xray-import-reussi.png) |
+| Import des cas de test dans Xray | [33 mapping des champs](captures/33-xray-mapping-champs.png), [34 import réussi](captures/34-xray-import-reussi.png), [35 test importé](captures/35-xray-test-importe-etapes.png), [36 les 41 tests dans Jira](captures/36-jira-41-tests-importes.png) |
+
+**Défaut d'import observé** : lors du premier import, le résultat attendu du dernier pas de chaque test a été placé sur le premier pas (capture 35). Cause probable : les cellules vides de mon fichier CSV. Correction : un résultat attendu sur chaque pas, dans les fichiers du dossier [xray/](xray/).
 
 ## À propos des captures
 
