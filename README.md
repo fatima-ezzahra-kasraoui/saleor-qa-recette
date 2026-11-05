@@ -1,82 +1,106 @@
 # Recette fonctionnelle d'une boutique e-commerce (Saleor Demo Store)
 
-Projet personnel de QA : recette manuelle et exploratoire d'une application e-commerce open source, réalisée comme en entreprise (plan de test, cas de test dans un outil de gestion de tests, anomalies, bilan).
+Projet personnel de QA : recette manuelle et exploratoire d'une application e-commerce open source, menée comme en entreprise. Plan de test, cas de test gérés dans Xray (Jira), exécution d'une campagne, déclaration d'anomalies et bilan.
 
-- **Produit testé** : [Saleor Demo Store](https://storefront.saleor.io), boutique de démonstration publique
-- **Date de début** : 5 novembre 2026
-- **Outils** : Xray (essai gratuit, dans Jira Cloud), Jira, Chrome DevTools, GitHub
+| | |
+|---|---|
+| **Produit testé** | [Saleor Demo Store](https://storefront.saleor.io), boutique de démonstration publique |
+| **Type de test** | Fonctionnel manuel, exploratoire, validations de formulaires |
+| **Environnement** | Chrome (desktop), Windows |
+| **Début du projet** | 5 novembre 2026 |
+| **Outils** | Xray, Jira, Chrome DevTools, GitHub |
+
+## Objectif
+
+Vérifier que les parcours critiques d'un client fonctionnent (trouver un produit, remplir un panier, créer un compte, aller jusqu'à la caisse) et repérer les défauts de comportement, de robustesse et d'ergonomie. Ce projet m'a servi à pratiquer :
+- la **recette** : plan de test, critères d'entrée et de sortie, campagne d'exécution, bilan ;
+- la **gestion de tests dans un outil** : cas de test, étapes, exécution et statuts dans Xray ;
+- le **test exploratoire** : sessions chartées et investigation avec les outils développeur du navigateur.
 
 ## État d'avancement
 
 | Étape | Statut |
 |---|---|
-| Plan de test | Fait ([plan-de-test.md](plan-de-test.md)) |
-| Découverte du produit | Faite : 6 anomalies candidates ([anomalies.md](anomalies.md)) |
-| Conception : 41 cas de test | Faite ([cas-de-test.csv](cas-de-test.csv)), importés dans Xray |
-| Campagne d'exécution dans Xray | À venir |
-| Sessions exploratoires (2 à 3) | À venir |
-| Bilan de recette Go/No-Go | À venir |
+| Plan de test | Fait |
+| Découverte du produit et premières anomalies | Faite |
+| Conception de 41 cas de test dans Xray | Faite |
+| Campagne d'exécution (Xray, « Exécution 1 ») | En cours |
+| Sessions exploratoires | À venir |
+| Bilan de recette Go / No-Go | À venir |
 
-Ce dépôt est mis à jour au fil du projet. Les résultats de la découverte ne sont **pas** des résultats de recette : chaque cas sera réexécuté officiellement, avec un statut (Passed, Failed, Blocked) et des preuves.
+Les résultats chiffrés de la campagne seront ajoutés avec le bilan, une fois tous les cas exécutés.
 
 ## Périmètre
 
-Trois fonctionnalités :
 1. **Compte utilisateur** : inscription, connexion, déconnexion
 2. **Recherche et catalogue** : recherche, catégories, filtres, fiche produit
 3. **Panier et début de commande** : ajout, quantité, suppression, passage en caisse jusqu'à l'étape de paiement
 
-Hors périmètre : paiement réel, tests de performance et de sécurité, administration, automatisation.
+Hors périmètre : paiement réel, performance, sécurité, administration, automatisation.
 
 ## Méthode
 
-- **Tests scriptés** : 41 cas (nominaux, limites, erreurs, ergonomie), une ligne par étape avec résultat attendu
-- **Test exploratoire** : sessions chartées de 45 minutes (session-based testing)
-- **Gravité des anomalies** : Bloquante, Critique, Majeure, Mineure (définitions dans le plan de test)
-- **Critères Go/No-Go** : définis avant l'exécution dans le plan de test
+- **Plan de test** ([plan-de-test.md](plan-de-test.md)) : périmètre, approche, critères Go / No-Go, échelle de gravité et risques, définis avant l'exécution.
+- **Cas de test** : 41 cas (nominaux, limites, erreurs, ergonomie), chacun avec ses étapes et son résultat attendu. La liste complète est dans [cas-de-test.csv](cas-de-test.csv).
+- **Exécution** : un ticket « Test Execution » dans Xray, avec un statut par cas (Passed, Failed, etc.).
+- **Anomalies** : décrites avec étapes de reproduction, résultat attendu, résultat obtenu, gravité et preuve.
 
-## Premiers constats (découverte, non officiels)
+### Exemples de cas de test
 
-| Réf. | Anomalie | Gravité |
-|---|---|---|
-| BUG-1 | Création de compte impossible : la requête d'inscription renvoie HTTP 400 (`redirectUrl` refusée) | Bloquante |
-| BUG-2 | Message « Failed to create account » sans explication | Majeure ou Mineure |
-| BUG-3 | Code HTML `&nbsp;` visible sur la page Homewares | Mineure |
-| BUG-4 | Frais de livraison annoncés « Free » avant leur calcul | Mineure |
-| BUG-5 | Libellés « (optional) » doublés sur le formulaire de caisse (à confirmer) | Mineure |
-| BUG-6 | Sous-total du panier incohérent avec la caisse (à reproduire) | Majeure |
+| ID | Cas | Type | Résultat attendu |
+|---|---|---|---|
+| TC-ACC-01 | Inscription avec des données valides | Nominal | Le compte est créé |
+| TC-SRC-03 | Recherche avec des caractères spéciaux (`%&<>'`) | Limite | Aucune erreur technique, comportement maîtrisé |
+| TC-PAN-08 | Cohérence du sous-total entre le panier et la caisse | Nominal | Le sous-total reste égal à la somme des produits |
+| TC-CMD-08 | Libellé des frais de livraison avant le choix du mode | Ergonomie | Les frais ne sont pas annoncés « Free » avant d'être calculés |
 
-Le détail, les étapes de reproduction et les captures sont dans [anomalies.md](anomalies.md).
+## Exemples d'anomalies
 
-Limites de l'environnement : l'inscription échoue (les cas de connexion seront probablement Blocked) et aucune passerelle de paiement n'est configurée (cas de paiement Blocked).
+Les anomalies détectées pendant la phase de découverte sont décrites dans [anomalies.md](anomalies.md). Elles seront confirmées ou infirmées par la campagne. En voici trois.
+
+### Création de compte impossible (gravité proposée : bloquante)
+
+À la création d'un compte, l'interface affiche seulement « Failed to create account ». Les outils développeur montrent que la requête `POST /api/auth/register` renvoie une erreur 400 : le serveur refuse l'URL de redirection envoyée (`redirectUrl`). L'utilisateur ne peut pas savoir pourquoi, et aucun compte ne peut être créé.
+
+![Réponse du serveur à l'inscription](captures/03-inscription-reponse-redirecturl.png)
+
+### Sous-total du panier incohérent avec la caisse (gravité proposée : majeure)
+
+Pour 6 jus à 1,99 $, la caisse affiche un sous-total de 11,94 $ et 63,94 $ de livraison, soit 75,88 $ au total. Le panier affiche un sous-total de 75,88 $ avec le message « You qualify for free shipping! ». Cette anomalie est à reproduire proprement avant d'être confirmée.
+
+![Panier : sous-total à 75,88 $](captures/25-panier-sous-total-75-88.png)
+![Caisse : sous-total à 11,94 $](captures/26-caisse-sous-total-11-94.png)
+
+### Frais de livraison annoncés « Free » avant d'être calculés (gravité proposée : mineure)
+
+Aux premières étapes de la caisse, le récapitulatif affiche « Shipping : Free » pour un total de 3,98 $. Les frais réels (entre 40,39 $ et 77,48 $) n'apparaissent qu'à la dernière étape.
+
+![Caisse, étape 2 : livraison annoncée Free](captures/17-caisse-etape2-shipping-free.png)
+
+## Limites de l'environnement
+
+Le site testé est une démonstration publique, ce qui limite certains tests :
+- l'inscription échoue, donc les cas de connexion et de déconnexion ne sont pas exécutables normalement ;
+- aucune passerelle de paiement n'est configurée, donc le paiement ne peut pas être testé.
+
+Ces cas sont traités comme des cas bloqués, avec une justification, comme dans une recette réelle.
+
+## Ce que j'ai appris
+
+- Le statut d'un ticket dans Jira (« Terminé ») n'est pas le résultat d'un test. Le résultat vit dans l'exécution Xray (Passed, Failed).
+- L'import de cas de test dans un outil demande un format précis : un fichier mal structuré a décalé des résultats attendus, ce que j'ai repéré et documenté.
+- Une bonne anomalie s'appuie sur une preuve technique (ici la réponse du serveur dans les outils développeur), pas seulement sur le message affiché.
 
 ## Contenu du dépôt
 
 ```
 .
 ├── README.md
-├── plan-de-test.md     Plan de test (périmètre, approche, critères, risques)
-├── cas-de-test.csv     41 cas de test avec notes de découverte
-├── anomalies.md        Anomalies avec étapes de reproduction et captures
-├── xray/               Fichiers CSV d'import dans Xray (version corrigée, une ligne par pas)
+├── plan-de-test.md     Plan de test
+├── cas-de-test.csv     Les 41 cas de test
+├── anomalies.md        Anomalies avec étapes de reproduction
+├── xray/               Fichiers d'import dans Xray
 └── captures/           Captures d'écran (données personnelles masquées)
 ```
 
-## Index des captures
-
-| Zone testée | Captures |
-|---|---|
-| Inscription (BUG-1, BUG-2) | [01](captures/01-inscription-echec-formulaire.png), [02](captures/02-inscription-requete-register-400.png), [03](captures/03-inscription-reponse-redirecturl.png), [29](captures/29-inscription-liste-requetes.png) |
-| Catalogue et filtres | [04](captures/04-catalogue-all-products.png), [05](captures/05-filtre-categorie-tshirts.png), [06](captures/06-categorie-groceries.png), [07](captures/07-categorie-homewares-nbsp.png) |
-| Recherche | [08](captures/08-recherche-juice.png), [09](captures/09-recherche-sans-resultat.png), [10](captures/10-recherche-caracteres-speciaux.png), [11](captures/11-recherche-casse.png) |
-| Fiche produit et panier | [12](captures/12-fiche-produit.png), [13](captures/13-panier-1-article.png), [14](captures/14-panier-quantite-2.png), [15](captures/15-panier-2-produits.png) |
-| Caisse, étapes (BUG-4) | [16](captures/16-caisse-etape1-shipping-free.png), [28](captures/28-caisse-etape1-formulaire-rempli.png), [17](captures/17-caisse-etape2-shipping-free.png), [31](captures/31-caisse-etape2-fastway-selectionne.png), [18](captures/18-caisse-etape3-total-ace.png), [19](captures/19-caisse-etape3-total-fastway.png) |
-| Caisse, validations | [20 téléphone invalide](captures/20-caisse-telephone-invalide.png), [30 téléphone étranger accepté](captures/30-caisse-telephone-etranger-accepte.png), [21 code postal invalide](captures/21-caisse-code-postal-invalide.png), [22 email vide](captures/22-caisse-email-vide.png), [23 email invalide](captures/23-caisse-email-invalide.png), [24 code promo invalide](captures/24-caisse-code-promo-invalide.png), [27 libellés optional](captures/27-caisse-libelles-optional.png) |
-| Totaux panier / caisse (BUG-6) | [25](captures/25-panier-sous-total-75-88.png), [26](captures/26-caisse-sous-total-11-94.png), [32](captures/32-caisse-6-articles-total-75-88.png) |
-| Import des cas de test dans Xray | [33 mapping des champs](captures/33-xray-mapping-champs.png), [34 import réussi](captures/34-xray-import-reussi.png), [35 test importé](captures/35-xray-test-importe-etapes.png), [36 les 41 tests dans Jira](captures/36-jira-41-tests-importes.png) |
-
-**Défaut d'import observé** : lors du premier import, le résultat attendu du dernier pas de chaque test a été placé sur le premier pas (capture 35). Cause probable : les cellules vides de mon fichier CSV. Correction : un résultat attendu sur chaque pas, dans les fichiers du dossier [xray/](xray/).
-
-## À propos des captures
-
-Les données personnelles visibles lors des tests (nom, email, adresse, téléphone) ont été masquées par des rectangles noirs avant publication.
+Les données personnelles visibles lors des tests ont été masquées avant publication.
