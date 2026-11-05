@@ -61,6 +61,19 @@ Limites de l'environnement : l'inscription échoue (les cas de connexion seront 
 └── captures/           Captures d'écran (données personnelles masquées)
 ```
 
+## Index des captures
+
+| Zone testée | Captures |
+|---|---|
+| Inscription (BUG-1, BUG-2) | [01](captures/01-inscription-echec-formulaire.png), [02](captures/02-inscription-requete-register-400.png), [03](captures/03-inscription-reponse-redirecturl.png), [29](captures/29-inscription-liste-requetes.png) |
+| Catalogue et filtres | [04](captures/04-catalogue-all-products.png), [05](captures/05-filtre-categorie-tshirts.png), [06](captures/06-categorie-groceries.png), [07](captures/07-categorie-homewares-nbsp.png) |
+| Recherche | [08](captures/08-recherche-juice.png), [09](captures/09-recherche-sans-resultat.png), [10](captures/10-recherche-caracteres-speciaux.png), [11](captures/11-recherche-casse.png) |
+| Fiche produit et panier | [12](captures/12-fiche-produit.png), [13](captures/13-panier-1-article.png), [14](captures/14-panier-quantite-2.png), [15](captures/15-panier-2-produits.png) |
+| Caisse, étapes (BUG-4) | [16](captures/16-caisse-etape1-shipping-free.png), [28](captures/28-caisse-etape1-formulaire-rempli.png), [17](captures/17-caisse-etape2-shipping-free.png), [31](captures/31-caisse-etape2-fastway-selectionne.png), [18](captures/18-caisse-etape3-total-ace.png), [19](captures/19-caisse-etape3-total-fastway.png) |
+| Caisse, validations | [20 téléphone invalide](captures/20-caisse-telephone-invalide.png), [30 téléphone étranger accepté](captures/30-caisse-telephone-etranger-accepte.png), [21 code postal invalide](captures/21-caisse-code-postal-invalide.png), [22 email vide](captures/22-caisse-email-vide.png), [23 email invalide](captures/23-caisse-email-invalide.png), [24 code promo invalide](captures/24-caisse-code-promo-invalide.png), [27 libellés optional](captures/27-caisse-libelles-optional.png) |
+| Totaux panier / caisse (BUG-6) | [25](captures/25-panier-sous-total-75-88.png), [26](captures/26-caisse-sous-total-11-94.png), [32](captures/32-caisse-6-articles-total-75-88.png) |
+| Import des cas de test dans Xray | [33 mapping des champs](captures/33-xray-mapping-champs.png), [34 import réussi](captures/34-xray-import-reussi.png) |
+
 ## À propos des captures
 
 Les données personnelles visibles lors des tests (nom, email, adresse, téléphone) ont été masquées par des rectangles noirs avant publication.
