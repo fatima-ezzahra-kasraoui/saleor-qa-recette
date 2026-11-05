@@ -26,9 +26,9 @@ Vérifier que les parcours critiques d'un client fonctionnent (trouver un produi
 | Conception de 41 cas de test dans Xray | Faite |
 | Campagne d'exécution (Xray, « Exécution 1 ») | En cours |
 | Sessions exploratoires | À venir |
-| Bilan de recette Go / No-Go | À venir |
+| Bilan de recette Go / No-Go | Brouillon provisoire ([bilan-recette.md](bilan-recette.md)) |
 
-Les résultats chiffrés de la campagne seront ajoutés avec le bilan, une fois tous les cas exécutés.
+Le bilan est provisoire : il sera finalisé, avec les résultats chiffrés, une fois tous les cas exécutés.
 
 ## Périmètre
 
@@ -42,7 +42,10 @@ Hors périmètre : paiement réel, performance, sécurité, administration, auto
 
 - **Plan de test** ([plan-de-test.md](plan-de-test.md)) : périmètre, approche, critères Go / No-Go, échelle de gravité et risques, définis avant l'exécution.
 - **Cas de test** : 41 cas (nominaux, limites, erreurs, ergonomie), chacun avec ses étapes et son résultat attendu. La liste complète est dans [cas-de-test.csv](cas-de-test.csv).
-- **Exécution** : un ticket « Test Execution » dans Xray, avec un statut par cas (Passed, Failed, etc.).
+- **Exécution** : un ticket « Test Execution » dans Xray, avec un statut par cas (Passed, Failed, etc.). Ci-dessous, l'exécution au moment de sa création, avec les 41 cas ajoutés.
+
+![Exécution Xray avec les 41 cas de test](captures/37-xray-execution-creee-41-tests.png)
+
 - **Anomalies** : décrites avec étapes de reproduction, résultat attendu, résultat obtenu, gravité et preuve.
 
 ### Exemples de cas de test
