@@ -29,7 +29,7 @@ Détail, étapes de reproduction et captures dans [anomalies.md](anomalies.md). 
 |---|---|---|---|---|
 | Bloquante | BUG-1 | Création de compte impossible (HTTP 400, `redirectUrl` refusée) | Environnement probable | À confirmer avec un second email |
 | Majeure | BUG-6 | Sous-total du panier incohérent avec la caisse. Hypothèse : le panier affiche le total livraison comprise à la place du sous-total | Produit (hypothèse) | À reproduire en navigation privée |
-| Majeure ou Mineure | BUG-2 | Message « Failed to create account » sans explication | Produit | À trancher |
+| Mineure | BUG-2 | Message « Failed to create account » sans explication | Produit | À confirmer |
 | Mineure | BUG-4 | Frais de livraison annoncés « Free » avant leur calcul | Produit | À reproduire avec un panier neuf |
 | Mineure | BUG-3 | Code HTML `&nbsp;` visible sur la page Homewares | À déterminer | Observée une fois |
 | Mineure | BUG-5 | Libellés « (optional) » doublés | Produit | À confirmer |
