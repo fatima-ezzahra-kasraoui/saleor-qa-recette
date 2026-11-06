@@ -1,7 +1,0 @@
-Test ID,Summary,Description,Priority,Labels,Test Type,Action,Data,Expected Result
-TC-ACC-01,TC-ACC-01 - Inscription avec données valides,Fonctionnalité : Compte | Type : Nominal | Préconditions : Email jamais utilisé,High,Compte,Manual,Ouvrir la page Create an Account,,L'étape s'exécute sans erreur
-TC-ACC-01,,,,,,"Saisir prénom, nom, email valide, mot de passe et confirmation identiques",,L'étape s'exécute sans erreur
-TC-ACC-01,,,,,,Cliquer sur Create Account,,Le compte est créé
-TC-ACC-02,TC-ACC-02 - Inscription avec email déjà utilisé,Fonctionnalité : Compte | Type : Erreur | Préconditions : Un compte existe avec cet email,High,Compte,Manual,Ouvrir Create an Account,,L'étape s'exécute sans erreur
-TC-ACC-02,,,,,,Saisir l'email déjà utilisé,,L'étape s'exécute sans erreur
-TC-ACC-02,,,,,,Valider,,Message clair indiquant que l'email est déjà utilisé

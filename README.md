@@ -21,7 +21,7 @@ Vérifier que les parcours critiques d'un client fonctionnent (trouver un produi
 
 | Étape | Statut |
 |---|---|
-| Plan de test | Fait |
+| Plan de test | Fait (v0.3 du 06/11/2026) |
 | Découverte du produit et premières anomalies | Faite |
 | Conception de 41 cas de test dans Xray | Faite |
 | Campagne d'exécution (Xray, « Exécution 1 ») | En cours |
@@ -86,23 +86,33 @@ Le site testé est une démonstration publique, ce qui limite certains tests :
 - l'inscription échoue, donc les cas de connexion et de déconnexion ne sont pas exécutables normalement ;
 - aucune passerelle de paiement n'est configurée, donc le paiement ne peut pas être testé.
 
-Ces cas sont traités comme des cas bloqués, avec une justification, comme dans une recette réelle.
+Ces cas sont traités comme des cas bloqués, avec une justification, comme dans une recette réelle. Autres limites : un seul navigateur (Chrome desktop), la passe mobile émulée prévue au plan n'a pas été réalisée. Les écarts par rapport au plan sont listés dans la section 12 du [plan de test](plan-de-test.md).
+
+## Fichiers d'import Xray
+
+Le dossier [xray/](xray/) contient deux fichiers CSV d'import, avec une ligne par étape de test :
+- `import-xray-41-cas.csv` : les 41 cas, pour un import complet ;
+- `import-xray-essai-2-cas.csv` : seulement TC-ACC-01 et TC-ACC-02, pour vérifier le mapping des champs et le regroupement des étapes avant d'importer les 41.
+
+**Ces fichiers sont des versions corrigées, qui n'ont pas servi à la campagne en cours.** La campagne s'appuie sur le premier import, qui avait deux défauts : le résultat attendu de la dernière étape de chaque test a été placé sur la première étape (cause probable : cellules vides dans mon fichier), et le résultat attendu de TC-CAT-03 a été tronqué par des virgules non protégées. Ces défauts rendent la lecture de certains pas confuse, sans changer les statuts saisis. Les fichiers corrigés donnent un résultat attendu précis à chaque étape.
 
 ## Ce que j'ai appris
 
 - Le statut d'un ticket dans Jira (« Terminé ») n'est pas le résultat d'un test. Le résultat vit dans l'exécution Xray (Passed, Failed).
 - L'import de cas de test dans un outil demande un format précis : un fichier mal structuré a décalé des résultats attendus, ce que j'ai repéré et documenté.
-- Une bonne anomalie s'appuie sur une preuve technique (ici la réponse du serveur dans les outils développeur), pas seulement sur le message affiché.
+- Les critères Go / No-Go doivent tenir compte des cas bloqués : un seuil de 90 % de Passed sur les 41 cas était inatteignable avec 5 cas Blocked. J'ai précisé le dénominateur dans le plan (v0.3) en le documentant.
+- Une bonne anomalie s'appuie sur une preuve technique (ici la réponse du serveur dans les outils développeur), pas seulement sur le message affiché. Il faut aussi en préciser l'origine : un défaut d'environnement de test n'est pas un défaut du produit.
 
 ## Contenu du dépôt
 
 ```
 .
 ├── README.md
-├── plan-de-test.md     Plan de test
+├── plan-de-test.md     Plan de test (v0.3, avec écarts et historique)
 ├── cas-de-test.csv     Les 41 cas de test
-├── anomalies.md        Anomalies avec étapes de reproduction
-├── xray/               Fichiers d'import dans Xray
+├── anomalies.md        Anomalies avec origine, gravité et étapes de reproduction
+├── bilan-recette.md    Bilan Go / No-Go provisoire
+├── xray/               Fichiers d'import Xray corrigés (voir ci-dessus)
 └── captures/           Captures d'écran (données personnelles masquées)
 ```
 
