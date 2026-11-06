@@ -1,0 +1,79 @@
+Test ID,Summary,Description,Priority,Labels,Test Type,Action,Data,Expected Result
+TC-ACC-01,TC-ACC-01 - Inscription avec données valides,Fonctionnalité : Compte | Type : Nominal | Préconditions : Email jamais utilisé,High,Compte,Manual,Ouvrir la page Create an Account,,La page Create an Account s'affiche avec son formulaire
+TC-ACC-01,,,,,,"Saisir prénom, nom, email valide, mot de passe et confirmation identiques",,Tous les champs du formulaire sont renseignés
+TC-ACC-01,,,,,,Cliquer sur Create Account,,Le compte est créé
+TC-ACC-02,TC-ACC-02 - Inscription avec email déjà utilisé,Fonctionnalité : Compte | Type : Erreur | Préconditions : Un compte existe avec cet email,High,Compte,Manual,Ouvrir Create an Account,,La page Create an Account s'affiche avec son formulaire
+TC-ACC-02,,,,,,Saisir l'email déjà utilisé,,L'email saisi apparaît dans le champ
+TC-ACC-02,,,,,,Valider,,Message clair indiquant que l'email est déjà utilisé
+TC-ACC-03,TC-ACC-03 - Inscription avec email au format invalide,Fonctionnalité : Compte | Type : Erreur | Préconditions : Aucune,Medium,Compte,Manual,Ouvrir Create an Account,,La page Create an Account s'affiche avec son formulaire
+TC-ACC-03,,,,,,Saisir « abc@ » comme email,,L'email saisi apparaît dans le champ
+TC-ACC-03,,,,,,Valider,,Le formulaire refuse la saisie avec un message explicite
+TC-ACC-04,TC-ACC-04 - Inscription avec mot de passe trop court,Fonctionnalité : Compte | Type : Limite | Préconditions : Aucune,Medium,Compte,Manual,Ouvrir Create an Account,,La page Create an Account s'affiche avec son formulaire
+TC-ACC-04,,,,,,Saisir un email valide et un mot de passe très court,,Les champs email et mot de passe sont renseignés
+TC-ACC-04,,,,,,Valider,,Le formulaire refuse et indique la règle sur le mot de passe
+TC-ACC-05,TC-ACC-05 - Connexion avec identifiants valides,Fonctionnalité : Compte | Type : Nominal | Préconditions : Compte existant,High,Compte,Manual,Ouvrir la page de connexion,,La page de connexion s'affiche
+TC-ACC-05,,,,,,Saisir email et mot de passe corrects,,Les champs email et mot de passe sont renseignés
+TC-ACC-05,,,,,,Valider,,L'utilisateur est connecté
+TC-ACC-06,TC-ACC-06 - Connexion avec mot de passe incorrect,Fonctionnalité : Compte | Type : Erreur | Préconditions : Compte existant,High,Compte,Manual,Ouvrir la page de connexion,,La page de connexion s'affiche
+TC-ACC-06,,,,,,Saisir un mauvais mot de passe,,Le champ mot de passe est renseigné
+TC-ACC-06,,,,,,Valider,,Connexion refusée avec message d'erreur sans détail sensible
+TC-ACC-07,TC-ACC-07 - Déconnexion,Fonctionnalité : Compte | Type : Nominal | Préconditions : Utilisateur connecté,Medium,Compte,Manual,Utiliser l'option de déconnexion,,L'utilisateur est déconnecté
+TC-ACC-08,TC-ACC-08 - Message d'erreur d'inscription explicite,Fonctionnalité : Compte | Type : Ergonomie | Préconditions : Un échec d'inscription provoqué,Medium,Compte,Manual,Provoquer un échec d'inscription,,Un message d'échec s'affiche en haut du formulaire
+TC-ACC-08,,,,,,Lire le message affiché,,Le message indique une cause ou une action possible pour l'utilisateur
+TC-SRC-01,TC-SRC-01 - Recherche d'un produit existant,Fonctionnalité : Recherche | Type : Nominal | Préconditions : Aucune,High,Recherche,Manual,Saisir « juice » dans la recherche,,Le terme apparaît dans la barre de recherche
+TC-SRC-01,,,,,,Valider,,Les produits jus apparaissent dans les résultats
+TC-SRC-02,TC-SRC-02 - Recherche sans résultat,Fonctionnalité : Recherche | Type : Erreur | Préconditions : Aucune,Medium,Recherche,Manual,Saisir « zzzzqqq »,,Le terme apparaît dans la barre de recherche
+TC-SRC-02,,,,,,Valider,,Un message « aucun résultat » clair est affiché
+TC-SRC-03,TC-SRC-03 - Recherche avec caractères spéciaux,Fonctionnalité : Recherche | Type : Limite | Préconditions : Aucune,Medium,Recherche,Manual,Saisir %&<>',,Les caractères spéciaux apparaissent tels quels dans la barre de recherche
+TC-SRC-03,,,,,,Valider,,Pas d'erreur technique visible et comportement maîtrisé
+TC-SRC-04,TC-SRC-04 - Recherche avec champ vide,Fonctionnalité : Recherche | Type : Limite | Préconditions : Aucune,Low,Recherche,Manual,Valider la recherche sans rien saisir,,Comportement cohérent sans plantage
+TC-SRC-05,TC-SRC-05 - Recherche insensible à la casse,Fonctionnalité : Recherche | Type : Nominal | Préconditions : Aucune,Low,Recherche,Manual,Rechercher « JUICE »,,Une page de résultats s'affiche pour « JUICE »
+TC-SRC-05,,,,,,Rechercher « juice »,,Les résultats sont identiques
+TC-CAT-01,TC-CAT-01 - Navigation par catégorie,Fonctionnalité : Catalogue | Type : Nominal | Préconditions : Aucune,High,Catalogue,Manual,Choisir Groceries dans le menu,,La liste correspond à la catégorie choisie
+TC-CAT-02,TC-CAT-02 - Filtre par catégorie sur All Products,Fonctionnalité : Catalogue | Type : Nominal | Préconditions : Aucune,High,Catalogue,Manual,Ouvrir All Products,,La page All Products s'affiche avec ses filtres
+TC-CAT-02,,,,,,Filtrer sur Category T-shirts,,Seuls les T-shirts sont affichés et le filtre actif est visible avec Clear all
+TC-CAT-03,TC-CAT-03 - Affichage de la fiche produit,Fonctionnalité : Catalogue | Type : Nominal | Préconditions : Aucune,High,Catalogue,Manual,Ouvrir la fiche Carrot Juice,,"La fiche affiche nom, prix, image et bouton d'ajout au panier"
+TC-CAT-04,TC-CAT-04 - Cohérence du prix liste / fiche,Fonctionnalité : Catalogue | Type : Nominal | Préconditions : Aucune,Medium,Catalogue,Manual,Noter le prix en liste,,Le prix du produit est relevé dans la liste
+TC-CAT-04,,,,,,Ouvrir la fiche produit,,Le prix est identique
+TC-CAT-05,TC-CAT-05 - Texte de description de catégorie propre,Fonctionnalité : Catalogue | Type : Ergonomie | Préconditions : Aucune,Low,Catalogue,Manual,Ouvrir la catégorie Homewares,,La page de la catégorie Homewares s'affiche
+TC-CAT-05,,,,,,Lire la description,,Description sans code HTML visible
+TC-PAN-01,TC-PAN-01 - Ajout d'un produit au panier,Fonctionnalité : Panier | Type : Nominal | Préconditions : Aucune,High,Panier,Manual,Ouvrir la fiche Carrot Juice,,La fiche Carrot Juice s'affiche avec le bouton Add to bag
+TC-PAN-01,,,,,,Cliquer sur Add to bag,,Produit dans le panier avec bonne quantité et bon prix
+TC-PAN-02,TC-PAN-02 - Augmentation de la quantité,Fonctionnalité : Panier | Type : Nominal | Préconditions : Un produit dans le panier,High,Panier,Manual,Passer la quantité à 2,,Quantité et total recalculés
+TC-PAN-03,TC-PAN-03 - Quantité à zéro ou négative,Fonctionnalité : Panier | Type : Limite | Préconditions : Un produit dans le panier,Medium,Panier,Manual,Saisir 0 puis une valeur négative,,Valeur refusée ou produit retiré sans total incohérent
+TC-PAN-04,TC-PAN-04 - Quantité très élevée,Fonctionnalité : Panier | Type : Limite | Préconditions : Un produit dans le panier,Medium,Panier,Manual,Saisir 9999,,Message de stock ou limite clair sans plantage
+TC-PAN-05,TC-PAN-05 - Suppression d'un produit,Fonctionnalité : Panier | Type : Nominal | Préconditions : Un produit dans le panier,High,Panier,Manual,Cliquer sur la corbeille,,Panier mis à jour et total recalculé
+TC-PAN-06,TC-PAN-06 - Persistance du panier après rechargement,Fonctionnalité : Panier | Type : Nominal | Préconditions : Un produit dans le panier,Medium,Panier,Manual,Recharger la page,,Le panier conserve son contenu
+TC-PAN-07,TC-PAN-07 - Total avec plusieurs produits,Fonctionnalité : Panier | Type : Nominal | Préconditions : Aucune,High,Panier,Manual,Ajouter Carrot Juice x2 et Banana Juice,,Le panier contient 3 articles : Carrot Juice x2 et Banana Juice
+TC-PAN-07,,,,,,Vérifier le total,,Total égal à la somme des lignes
+TC-PAN-08,TC-PAN-08 - Cohérence du sous-total panier / caisse,Fonctionnalité : Panier | Type : Nominal | Préconditions : 6 Carrot Juice dans le panier et un mode de livraison choisi en caisse,High,Panier,Manual,Noter le sous-total du panier,,"Le sous-total du panier est relevé (11,94 $ pour 6 Carrot Juice)"
+TC-PAN-08,,,,,,Passer en caisse et choisir un mode de livraison,,La caisse affiche le sous-total des produits et les frais du mode choisi
+TC-PAN-08,,,,,,Rouvrir le panier,,Le panier s'affiche avec son sous-total
+TC-PAN-08,,,,,,Comparer le sous-total,,Le sous-total reste égal à la somme des produits (11.94 $)
+TC-PAN-09,TC-PAN-09 - Seuil de livraison gratuite,Fonctionnalité : Panier | Type : Limite | Préconditions : Panier sous 75 $ de produits,High,Panier,Manual,Ajouter des produits sous 75 $,,Le panier contient moins de 75 $ de produits
+TC-PAN-09,,,,,,Lire le message de livraison,,Message indiquant le montant restant sans livraison gratuite
+TC-CMD-01,TC-CMD-01 - Accès à la caisse en invité,Fonctionnalité : Commande | Type : Nominal | Préconditions : Un produit dans le panier,High,Commande,Manual,Cliquer sur Checkout,,L'étape Information s'affiche sans compte
+TC-CMD-02,TC-CMD-02 - Champs obligatoires vides,Fonctionnalité : Commande | Type : Erreur | Préconditions : Étape Information affichée,High,Commande,Manual,"Laisser vides email, prénom, nom, rue et ville",,Les champs obligatoires restent vides
+TC-CMD-02,,,,,,Cliquer sur Continue to shipping,,Messages d'erreur sur chaque champ obligatoire
+TC-CMD-03,TC-CMD-03 - Email invalide,Fonctionnalité : Commande | Type : Erreur | Préconditions : Étape Information affichée,High,Commande,Manual,Saisir « zxc@ »,,L'email saisi apparaît dans le champ
+TC-CMD-03,,,,,,Valider,,Message d'erreur sur le format de l'email
+TC-CMD-04,TC-CMD-04 - Code postal au format absurde,Fonctionnalité : Commande | Type : Limite | Préconditions : Étape Information affichée,Medium,Commande,Manual,Saisir « qwwer » comme code postal,,Le code postal saisi apparaît dans le champ
+TC-CMD-04,,,,,,Valider,,Erreur de validation sur le champ
+TC-CMD-05,TC-CMD-05 - Téléphone invalide,Fonctionnalité : Commande | Type : Limite | Préconditions : Étape Information affichée,Medium,Commande,Manual,Saisir « 57829 »,,Le numéro saisi apparaît dans le champ téléphone
+TC-CMD-05,,,,,,Valider,,Erreur de validation sur le champ
+TC-CMD-06,TC-CMD-06 - Code postal vide,Fonctionnalité : Commande | Type : Limite | Préconditions : Étape Information affichée,Low,Commande,Manual,Laisser le code postal vide,,Le champ code postal reste vide
+TC-CMD-06,,,,,,Valider,,Comportement cohérent avec le libellé optional
+TC-CMD-07,TC-CMD-07 - Code promo invalide,Fonctionnalité : Commande | Type : Erreur | Préconditions : Étape Information affichée,Medium,Commande,Manual,Saisir un code bidon,,Le code saisi apparaît dans le champ Discount code
+TC-CMD-07,,,,,,Cliquer sur Apply,,Message d'erreur et total inchangé
+TC-CMD-08,TC-CMD-08 - Libellé des frais de livraison avant choix du mode,Fonctionnalité : Commande | Type : Ergonomie | Préconditions : Panier neuf,Medium,Commande,Manual,Aller en caisse,,L'étape Information de la caisse s'affiche
+TC-CMD-08,,,,,,Lire Shipping aux étapes Information puis Shipping,,Le libellé des frais de livraison est relevé à chaque étape
+TC-CMD-08,,,,,,Comparer avec l'étape Payment,,Les frais ne sont pas annoncés Free avant d'être calculés
+TC-CMD-09,TC-CMD-09 - Mise à jour du total au changement de mode de livraison,Fonctionnalité : Commande | Type : Nominal | Préconditions : Étape Shipping affichée,High,Commande,Manual,Choisir un mode,,Un mode de livraison est sélectionné
+TC-CMD-09,,,,,,Continuer,,L'étape Payment s'affiche avec les frais du mode choisi
+TC-CMD-09,,,,,,Revenir et choisir un autre mode,,Frais et total mis à jour correctement
+TC-CMD-10,TC-CMD-10 - Libellés des champs sans doublon,Fonctionnalité : Commande | Type : Ergonomie | Préconditions : Étape Information affichée,Low,Commande,Manual,Lire les libellés des champs optionnels,,Chaque libellé n'affiche (optional) qu'une fois
+TC-CMD-11,TC-CMD-11 - Message de l'étape Payment adapté au client,Fonctionnalité : Commande | Type : Ergonomie | Préconditions : Étape Payment atteinte,Low,Commande,Manual,Lire le bandeau affiché,,Message compréhensible par un client
+TC-CMD-12,TC-CMD-12 - Paiement de la commande,Fonctionnalité : Commande | Type : Nominal | Préconditions : Étape Payment atteinte,High,Commande,Manual,Cliquer sur Pay,,Commande confirmée
+TC-CMD-13,TC-CMD-13 - Accès à la caisse avec un panier vide,Fonctionnalité : Commande | Type : Erreur | Préconditions : Panier vide,Medium,Commande,Manual,Ouvrir une URL de caisse sans produit,,Redirection ou message adapté sans page cassée
+TC-CMD-14,TC-CMD-14 - Création de compte depuis la caisse,Fonctionnalité : Commande | Type : Nominal | Préconditions : Étape Information affichée,Medium,Commande,Manual,Cocher Create an account for faster checkout,,La case est cochée
+TC-CMD-14,,,,,,Continuer,,Le compte est créé ou une erreur claire est affichée
