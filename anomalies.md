@@ -10,7 +10,7 @@ Environnement : https://storefront.saleor.io (boutique de démonstration publiqu
 |---|---|---|---|
 | BUG-1 | Bloquante | Environnement probable | À confirmer |
 | BUG-6 | Majeure | Produit (hypothèse) | À reproduire |
-| BUG-2 | Majeure ou Mineure | Produit | À trancher |
+| BUG-2 | Mineure | Produit | À confirmer |
 | BUG-4 | Mineure | Produit | À reproduire |
 | BUG-3 | Mineure | À déterminer | Observée une fois |
 | BUG-5 | Mineure | Produit | À confirmer |
@@ -28,7 +28,7 @@ Environnement : https://storefront.saleor.io (boutique de démonstration publiqu
 - **Captures** : [formulaire](captures/01-inscription-echec-formulaire.png) · [requête](captures/02-inscription-requete-register-400.png) · [réponse](captures/03-inscription-reponse-redirecturl.png)
 
 ## BUG-2 — Message d'échec d'inscription sans explication
-- **Gravité** : Majeure ou Mineure (à trancher)
+- **Gravité** : Mineure. Ce défaut ne bloque rien à lui seul : la fonction qui échoue est couverte par BUG-1, et BUG-2 ne concerne que la qualité du message. Cela relève du confort dans l'échelle du plan de test. On peut soutenir qu'un message muet sur un parcours critique mérite mieux, mais la gravité du parcours est déjà portée par BUG-1.
 - **Origine** : Produit. Le serveur renvoie une réponse détaillée que l'interface n'affiche pas.
 - **Cas lié** : TC-ACC-08
 - **Obtenu** : l'interface affiche uniquement « Failed to create account »
@@ -66,6 +66,7 @@ Environnement : https://storefront.saleor.io (boutique de démonstration publiqu
 - **Constat** : pour 6 Carrot Juice (1,99 $ l'unité), la caisse affiche un sous-total de 11,94 $ et une livraison de 63,94 $ (total 75,88 $). Le volet panier affiche un sous-total de 75,88 $, le message « You qualify for free shipping! » et « Shipping : Free »
 - **Attendu** : sous-total de 11,94 $ et message indiquant le montant restant avant la livraison gratuite
 - **Hypothèse sur la cause** : le sous-total du panier (75,88 $) est exactement le total de la caisse (11,94 + 63,94). Le panier semble donc afficher le total livraison comprise à la place du sous-total. Le seuil de livraison gratuite (75 $) paraît alors dépassé, ce qui expliquerait le message « free shipping » et « Shipping : Free ».
+- **Seuil de 75 $** : relevé sur le site, pas supposé. Le bandeau annonce « Free shipping on orders over $75.00 » ([capture 12](captures/12-fiche-produit.png)), et le panier affiche « Add $73.01 more for free shipping » pour 1,99 $ de produits ([capture 13](captures/13-panier-1-article.png)). Les montants suivants confirment le calcul : 71,02 $ pour 3,98 $ ([capture 14](captures/14-panier-quantite-2.png)) et 69,03 $ pour 5,97 $ ([capture 15](captures/15-panier-2-produits.png)), soit 75,00 $ à chaque fois. À relire sur le site pendant la reproduction.
 - **Réserve** : l'ordre exact des actions et des captures n'a pas été vérifié, donc l'écart pourrait avoir une autre cause.
 - **Reproduction à faire** (navigation privée) :
   1. Ajouter 6 Carrot Juice, ouvrir le panier : le sous-total doit être de 11,94 $ (capture).
